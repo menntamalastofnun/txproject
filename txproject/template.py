@@ -19,6 +19,13 @@ class Template(object):
         self.name = name
         self.template_data = template_data
 
+    def dependencies(self):
+        """Returns a list of dependencies necessary
+        for this template
+
+        """
+        return self.template_data.get("dependencies", [])
+
     def directories(self):
         """Returns a list of directories to be
         created as part of this template

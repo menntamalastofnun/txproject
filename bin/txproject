@@ -25,6 +25,7 @@ parser = scripts.getTxprojectOptionsParser(__doc__)
 options, args = parser.parse_args()
 if len(args) == 1:
     f = factory.NewProject(args[0], "default", ".")
+    f.checkDependencies()
     f.makeDirectories()
     f.makeFiles()
     printer.printDirectory(f.projectName())

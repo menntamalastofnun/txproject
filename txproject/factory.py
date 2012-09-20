@@ -47,6 +47,18 @@ class NewProject(object):
                 files.append(nf)
         return files
 
+    def checkDependencies(self):
+        not_found = []
+        for d in self.getTemplate().dependencies():
+            try:
+                __import__(d)
+            except ImportError:
+                not_found.append(d)
+
+        if not_found:
+            raise ImportError("Unable to load dependencies: %s" % 
+                              ', '.join(not_found))
+
     def makeDirectories(self):
         for d in self.directories():
             path = os.path.join(self.root,
